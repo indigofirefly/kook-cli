@@ -21,7 +21,6 @@ async function update() {
   const current = pkg.version;
   if (semver.valid(latest.version) && semver.valid(current) && semver.gte(current, latest.version)) {
     log.success(`当前已是最新版本 ${chalk.cyan(current)}`);
-    log.success(`当前已是最新版本 ~~`);
     return;
   }
 
