@@ -1,6 +1,6 @@
 {
   "name": "kook-cli",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "A Vue CLI style scaffolding tool for downloading project templates",
   "main": "src/index.js",
   "bin": {
