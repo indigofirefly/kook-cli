@@ -29,15 +29,19 @@ async function create(nameArg, options = {}) {
     throw new Error('没有可用的模板，请检查 config.json');
   }
 
-  // 需求 12：create 时异步检查版本，不阻塞交互。
-  // 每次实时查 npm 官方源，与本地全局安装的版本比较；未全局安装时回退到当前运行版本。
-  const updatePromise =
+  // 启动 create 时立刻查一次 npm 官方源，与本地全局安装的版本比较；
+  // 需要在选择模板之前给出提示，所以这里同步等待结果。
+  const updateInfo =
     config.checkUpdate && options.check !== false
-      ? (async () => {
+      ? await (async () => {
           const installed = await getGlobalInstalledVersion();
           return checkUpdate(installed || pkg.version, { registry: OFFICIAL_REGISTRY });
         })()
-      : Promise.resolve(null);
+      : null;
+
+  if (updateInfo && updateInfo.hasUpdate) {
+    printUpdateNotice(updateInfo);
+  }
 
   const templateKey = await pickTemplate(config.templates, options.template);
   const template = config.templates[templateKey];
@@ -108,12 +112,6 @@ async function create(nameArg, options = {}) {
   } finally {
     process.removeListener('SIGINT', onSigint);
     await fs.remove(tmpDir).catch(() => {});
-  }
-
-  // 版本检查与下载并行，到这里基本已经返回，不会拖慢创建流程
-  const updateInfo = await updatePromise;
-  if (updateInfo && updateInfo.hasUpdate) {
-    printUpdateNotice(updateInfo);
   }
 
   printSuccess({ name, templateKey, targetDir, startedAt });
