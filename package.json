@@ -1,0 +1,41 @@
+{
+  "name": "kook-cli",
+  "version": "0.1.2",
+  "description": "A Vue CLI style scaffolding tool for downloading project templates",
+  "main": "src/index.js",
+  "bin": {
+    "kook": "bin/kook.js",
+    "kook-cli": "bin/kook.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=16.14.0"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "cli",
+    "scaffold",
+    "template",
+    "vue",
+    "uni-app"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cli-progress": "^3.12.0",
+    "commander": "^11.1.0",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1",
+    "semver": "^7.6.3"
+  }
+}

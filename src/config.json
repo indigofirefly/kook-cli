@@ -1,0 +1,21 @@
+{
+  "registry": "https://registry.npmmirror.com",
+  "checkUpdate": true,
+  "templates": {
+    "vue3admin": {
+      "description": "Vue3 + Element Plus 后台管理模板",
+      "url": "https://gitee.com/yinghuopocket/yyadmin.git",
+      "branch": "master"
+    },
+    "vue3H5": {
+      "description": "uni-app Vue3 H5 移动端模板",
+      "url": "https://gitee.com/yinghuopocket/uni-vue3.git",
+      "branch": "master"
+    },
+    "uni-mini-program": {
+      "description": "uni-app 小程序模板",
+      "url": "https://gitee.com/yinghuopocket/uni-app.git",
+      "branch": "master"
+    }
+  }
+}
