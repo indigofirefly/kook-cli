@@ -7,7 +7,7 @@ const semver = require('semver');
 const chalk = require('chalk');
 const pkg = require('../../package.json');
 const { loadConfig } = require('../core/config');
-const { getLatestVersion } = require('../core/version');
+const { getLatestVersion, OFFICIAL_REGISTRY } = require('../core/version');
 const log = require('../utils/log');
 
 async function update() {
@@ -32,8 +32,11 @@ async function update() {
 
   log.info(`准备升级 kook-cli ${chalk.gray(current)} -> ${chalk.cyan(latest.version)}（使用 ${pm}）`);
 
+  // 显式指定官方源，避免本地 ~/.npmrc 指向的私有源未同步新版本
   const args =
-    pm === 'yarn' ? ['global', 'add', 'kook-cli@latest'] : ['install', '-g', 'kook-cli@latest'];
+    pm === 'yarn'
+      ? ['global', 'add', 'kook-cli@latest', `--registry=${OFFICIAL_REGISTRY}`]
+      : ['install', '-g', 'kook-cli@latest', `--registry=${OFFICIAL_REGISTRY}`];
   await runLive(pm, args);
 
   log.success('升级完成，执行 kook-cli -V 查看新版本');

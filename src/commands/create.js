@@ -173,7 +173,9 @@ async function renamePackage(targetDir, name) {
 function printUpdateNotice(info) {
   log.info(`检测到 kook-cli 最新版:${chalk.red(info.latest)}`);
   log.info(`当前版本:${chalk.red(info.current)} ~`);
-  log.info(`可使用 ${chalk.yellow('pnpm')} install -g kook-cli@latest 更新 ~`);
+  log.info(
+    `可使用 ${chalk.yellow('pnpm')} install -g kook-cli@latest --registry=${OFFICIAL_REGISTRY} 更新 ~`
+  );
 }
 
 function printSuccess({ name, templateKey, targetDir, startedAt }) {
